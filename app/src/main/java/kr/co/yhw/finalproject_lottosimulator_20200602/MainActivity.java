@@ -109,8 +109,8 @@ public class MainActivity extends BaseActivity {
             winMoney +=50000;
         }
         else if (correctCount == 3){
-            winMoney +=5000;
-//            useMoney -=5000;
+//            winMoney +=5000;
+            useMoney -=5000;
         }
         else {
 
