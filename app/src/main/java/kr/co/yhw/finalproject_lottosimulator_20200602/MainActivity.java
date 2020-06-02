@@ -38,15 +38,24 @@ public class MainActivity extends BaseActivity {
     List<TextView> myNumTxts = new ArrayList<>();
 
     boolean isAutoBuyRunning = false;
+//    같은 핸드러 => 여러곳에서 사용 => 멤버변수 생성 (공유해서 사용하려고)
     Handler mHandler = new Handler();
+//    구매로직 코드 => 여러곳에서 사용 =>멤버변수 생성
     Runnable buyLottoRunnable = new Runnable() {
         @Override
         public void run() {
+//            사용한 금액이 1천만원 이하라면
             if (useMoney < 1000000000) {
+//                로또 번호 생성 / 등수 맞추기 진행
                 makeLottoWinNumbers();
                 checkWinRank();
+
+//                이 행동을 다시 할잉로 등록해달라
+//                => 반복으로 동작하게 되는 이유
                 mHandler.post(buyLottoRunnable);
             } else {
+//                돈을 다 썼으면 로또 구매 종료 안내
+//                추가 할일 등록 x => 반복이 되지 않는 이유
                 Toast.makeText(mContext, "로또 구매를 종료합니다.", Toast.LENGTH_SHORT).show();
 
             }
