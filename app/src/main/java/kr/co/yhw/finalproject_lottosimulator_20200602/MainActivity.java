@@ -3,10 +3,13 @@ package kr.co.yhw.finalproject_lottosimulator_20200602;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import kr.co.yhw.finalproject_lottosimulator_20200602.databinding.ActivityMainBinding;
 
@@ -17,10 +20,12 @@ public class MainActivity extends BaseActivity {
     int[] winLottoNumArr = new int[6];  //배열의 3번칸에 적힌값. 0 => 배열의 모든 칸 기본값은 0
     int bounsNum = 0;
 
+    List<TextView> winNumTxts = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setupEvents();
         setValues();
     }
@@ -39,31 +44,36 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setValues() {
-
+        winNumTxts.add((binding.winNumTxt01));
+        winNumTxts.add((binding.winNumTxt02));
+        winNumTxts.add((binding.winNumTxt03));
+        winNumTxts.add((binding.winNumTxt04));
+        winNumTxts.add((binding.winNumTxt05));
+        winNumTxts.add((binding.winNumTxt06));
     }
 
-    void makeLottoWinNumbers(){
+    void makeLottoWinNumbers() {
 //        로또 넘버 초기화
-        for (int i = 0; i<winLottoNumArr.length; i++){
+        for (int i = 0; i < winLottoNumArr.length; i++) {
             winLottoNumArr[i] = 0;
         }
 
 //        여섯개의 당첨번호 뽑기
-        for (int i =0; i<winLottoNumArr.length; i++){
-            while (true){
+        for (int i = 0; i < winLottoNumArr.length; i++) {
+            while (true) {
 
-                int randomNum = (int) ( Math.random() * 45 + 1 );
+                int randomNum = (int) (Math.random() * 45 + 1);
 
                 boolean isDuplicatedOk = true;
 
-                for ( int num : winLottoNumArr ) {
-                    if (num == randomNum){
+                for (int num : winLottoNumArr) {
+                    if (num == randomNum) {
                         isDuplicatedOk = false;
                         break;
                     }
                 }
 
-                if(isDuplicatedOk) {
+                if (isDuplicatedOk) {
                     winLottoNumArr[i] = randomNum;
                     break;
                 }
@@ -71,9 +81,10 @@ public class MainActivity extends BaseActivity {
             }
         }
         Arrays.sort(winLottoNumArr);
-        for ( int winNum : winLottoNumArr){
-
-            Log.d("당첨번호",winNum+"");
+        for (int i = 0; i < winNumTxts.size(); i++) {
+            int winNum = winLottoNumArr[i];
+//            Log.d("당첨번호", winNum + "");
+            winNumTxts.get(i).setText(winNum+"");
         }
 
 
