@@ -37,18 +37,19 @@ public class MainActivity extends BaseActivity {
 
     List<TextView> myNumTxts = new ArrayList<>();
 
+    boolean isAutoBuyRunning = false;
     Handler mHandler = new Handler();
-    Runnable buyLottoRunnable =new Runnable() {
+    Runnable buyLottoRunnable = new Runnable() {
         @Override
         public void run() {
-           if (useMoney < 100000000){
-               makeLottoWinNumbers();
-               checkWinRank();
-               mHandler.post(buyLottoRunnable);
-           }
-           else {
-               Toast.makeText(mContext, "로또 구매를 종료합니다.", Toast.LENGTH_SHORT).show();
-           }
+            if (useMoney < 1000000000) {
+                makeLottoWinNumbers();
+                checkWinRank();
+                mHandler.post(buyLottoRunnable);
+            } else {
+                Toast.makeText(mContext, "로또 구매를 종료합니다.", Toast.LENGTH_SHORT).show();
+
+            }
 
         }
     };
@@ -69,7 +70,17 @@ public class MainActivity extends BaseActivity {
         binding.buyAutoLottoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHandler.post(buyLottoRunnable);
+
+                if (!isAutoBuyRunning) {
+                    mHandler.post(buyLottoRunnable);
+                    isAutoBuyRunning = true;
+
+                    binding.buyAutoLottoBtn.setText(getResources().getString(R.string.pause_buy_auto_lotto_btn));
+                } else {
+                    mHandler.removeCallbacks(buyLottoRunnable);
+                    isAutoBuyRunning = false;
+                    binding.buyAutoLottoBtn.setText(getResources().getString(R.string.resume_buy_auto_lotto_btn));
+                }
 //                while (true){
 //                    makeLottoWinNumbers();
 //                    checkWinRank();
@@ -115,64 +126,58 @@ public class MainActivity extends BaseActivity {
 
         int correctCount = 0;
 
-        for (TextView myNumTxt : myNumTxts){
+        for (TextView myNumTxt : myNumTxts) {
             //               myNumTxt(string)을 int로 바꿔야함 =>
             int myNum = Integer.parseInt(myNumTxt.getText().toString());
 
-            for (int winNum : winLottoNumArr){
+            for (int winNum : winLottoNumArr) {
 
-                if(myNum == winNum){
+                if (myNum == winNum) {
                     correctCount++;
                 }
             }
         }
-        if (correctCount == 6 ){
+        if (correctCount == 6) {
             winMoney += 1300000000;
             firstRankCount++;
-        }
-        else if (correctCount ==5){
+        } else if (correctCount == 5) {
             boolean isBounsNumCorrect = false;
 
-            for(TextView myNumTxt :myNumTxts){
+            for (TextView myNumTxt : myNumTxts) {
                 int myNum = Integer.parseInt(myNumTxt.getText().toString());
 
-                if (myNum == bounsNum){
-                    isBounsNumCorrect =true;
+                if (myNum == bounsNum) {
+                    isBounsNumCorrect = true;
                     break;
                 }
             }
-            if (isBounsNumCorrect){
-                winMoney +=54000000;
+            if (isBounsNumCorrect) {
+                winMoney += 54000000;
                 secondRankCount++;
-            }
-            else {
-                winMoney +=1450000;
+            } else {
+                winMoney += 1450000;
                 thirdRankCount++;
             }
-        }
-        else if (correctCount ==4 ){
-            winMoney +=50000;
+        } else if (correctCount == 4) {
+            winMoney += 50000;
             fourthRankCount++;
-        }
-        else if (correctCount == 3){
+        } else if (correctCount == 3) {
 //            winMoney +=5000;
-            useMoney -=5000;
+            useMoney -= 5000;
             fifthRankCount++;
-        }
-        else {
+        } else {
             unRankCount++;
         }
 
-        binding.winMoneyTxt.setText(String.format("%,d",winMoney));
-        binding.useMoneyTxt.setText(String.format("%,d",useMoney));
+        binding.winMoneyTxt.setText(String.format("%,d", winMoney));
+        binding.useMoneyTxt.setText(String.format("%,d", useMoney));
 
-        binding.firstRankTxt.setText(String.format("%d회",firstRankCount));
-        binding.secondRankTxt.setText(String.format("%d회",secondRankCount));
-        binding.thirdRankTxt.setText(String.format("%d회",thirdRankCount));
-        binding.fourthRankTxt.setText(String.format("%d회",fourthRankCount));
-        binding.fifthRankTxt.setText(String.format("%d회",fifthRankCount));
-        binding.unRankTxt.setText(String.format("%d회",unRankCount));
-
+        binding.firstRankTxt.setText(String.format("%d회", firstRankCount));
+        binding.secondRankTxt.setText(String.format("%d회", secondRankCount));
+        binding.thirdRankTxt.setText(String.format("%d회", thirdRankCount));
+        binding.fourthRankTxt.setText(String.format("%d회", fourthRankCount));
+        binding.fifthRankTxt.setText(String.format("%d회", fifthRankCount));
+        binding.unRankTxt.setText(String.format("%d회", unRankCount));
 
 
     }
