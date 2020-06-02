@@ -3,6 +3,7 @@
     <string name="win_number">Win Number</string>
     <string name="my_number">My Number</string>
     <string name="buy_one_lotto_btn">Buy</string>
+    <string name="buy_auto_lotto_btn">자동으로 구매하기</string>
     <string name="use_money">Used Money</string>
     <string name="win_money">Win Money</string>
     <string name="first_rank">1등</string>
