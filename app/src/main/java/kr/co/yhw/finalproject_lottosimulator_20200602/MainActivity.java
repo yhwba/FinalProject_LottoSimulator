@@ -57,6 +57,7 @@ public class MainActivity extends BaseActivity {
         for (int i = 0; i < winLottoNumArr.length; i++) {
             winLottoNumArr[i] = 0;
         }
+        bounsNum =0;
 
 //        여섯개의 당첨번호 뽑기
         for (int i = 0; i < winLottoNumArr.length; i++) {
@@ -81,11 +82,33 @@ public class MainActivity extends BaseActivity {
             }
         }
         Arrays.sort(winLottoNumArr);
+
+        while (true){
+
+            int randomNum =(int)(Math.random()*45 +1);
+
+            boolean isDuplicatedOk = true;
+
+            for (int num : winLottoNumArr){
+                if (num == randomNum){
+                    isDuplicatedOk=false;
+                    break;
+                }
+            }
+
+            if(isDuplicatedOk){
+                bounsNum = randomNum;
+                break;
+            }
+        }
+
         for (int i = 0; i < winNumTxts.size(); i++) {
             int winNum = winLottoNumArr[i];
 //            Log.d("당첨번호", winNum + "");
             winNumTxts.get(i).setText(winNum+"");
         }
+
+        binding.bounsNumTxt.setText(bounsNum+"");
 
 
     }
