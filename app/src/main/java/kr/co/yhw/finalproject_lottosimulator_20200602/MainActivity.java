@@ -23,6 +23,10 @@ public class MainActivity extends BaseActivity {
     List<TextView> winNumTxts = new ArrayList<>();
     long useMoney = 0L;
 
+    long winMoney = 0L;
+
+    List<TextView> myNumTxts = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,26 +50,84 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setValues() {
-        winNumTxts.add((binding.winNumTxt01));
-        winNumTxts.add((binding.winNumTxt02));
-        winNumTxts.add((binding.winNumTxt03));
-        winNumTxts.add((binding.winNumTxt04));
-        winNumTxts.add((binding.winNumTxt05));
-        winNumTxts.add((binding.winNumTxt06));
+        winNumTxts.add(binding.winNumTxt01);
+        winNumTxts.add(binding.winNumTxt02);
+        winNumTxts.add(binding.winNumTxt03);
+        winNumTxts.add(binding.winNumTxt04);
+        winNumTxts.add(binding.winNumTxt05);
+        winNumTxts.add(binding.winNumTxt06);
+
+        myNumTxts.add(binding.myNumTxt01);
+        myNumTxts.add(binding.myNumTxt02);
+        myNumTxts.add(binding.myNumTxt03);
+        myNumTxts.add(binding.myNumTxt04);
+        myNumTxts.add(binding.myNumTxt05);
+        myNumTxts.add(binding.myNumTxt06);
+
     }
 
-    void checkWinRank(){
-        useMoney +=1000;
+    void checkWinRank() {
+        useMoney += 1000;
 
         binding.useMoneyTxt.setText(String.format("%,d원 ", useMoney));
 
+        int correctCount = 0;
+
+        for (TextView myNumTxt : myNumTxts){
+            //               myNumTxt(string)을 int로 바꿔야함 =>
+            int myNum = Integer.parseInt(myNumTxt.getText().toString());
+
+            for (int winNum : winLottoNumArr){
+
+                if(myNum == winNum){
+                    correctCount++;
+                }
+            }
+        }
+        if (correctCount == 6 ){
+            winMoney += 1300000000;
+        }
+        else if (correctCount ==5){
+            boolean isBounsNumCorrect = false;
+
+            for(TextView myNumTxt :myNumTxts){
+                int myNum = Integer.parseInt(myNumTxt.getText().toString());
+
+                if (myNum == bounsNum){
+                    isBounsNumCorrect =true;
+                    break;
+                }
+            }
+            if (isBounsNumCorrect){
+                winMoney +=54000000;
+            }
+            else {
+                winMoney +=1450000;
+            }
+        }
+        else if (correctCount ==4 ){
+            winMoney +=50000;
+        }
+        else if (correctCount == 3){
+            winMoney +=5000;
+//            useMoney -=5000;
+        }
+        else {
+
+        }
+
+        binding.winMoneyTxt.setText(String.format("%,d",winMoney));
+        binding.useMoneyTxt.setText(String.format("%,d",useMoney));
+
+
     }
+
     void makeLottoWinNumbers() {
 //        로또 넘버 초기화
         for (int i = 0; i < winLottoNumArr.length; i++) {
             winLottoNumArr[i] = 0;
         }
-        bounsNum =0;
+        bounsNum = 0;
 
 //        여섯개의 당첨번호 뽑기
         for (int i = 0; i < winLottoNumArr.length; i++) {
@@ -91,20 +153,20 @@ public class MainActivity extends BaseActivity {
         }
         Arrays.sort(winLottoNumArr);
 
-        while (true){
+        while (true) {
 
-            int randomNum =(int)(Math.random()*45 +1);
+            int randomNum = (int) (Math.random() * 45 + 1);
 
             boolean isDuplicatedOk = true;
 
-            for (int num : winLottoNumArr){
-                if (num == randomNum){
-                    isDuplicatedOk=false;
+            for (int num : winLottoNumArr) {
+                if (num == randomNum) {
+                    isDuplicatedOk = false;
                     break;
                 }
             }
 
-            if(isDuplicatedOk){
+            if (isDuplicatedOk) {
                 bounsNum = randomNum;
                 break;
             }
@@ -113,10 +175,10 @@ public class MainActivity extends BaseActivity {
         for (int i = 0; i < winNumTxts.size(); i++) {
             int winNum = winLottoNumArr[i];
 //            Log.d("당첨번호", winNum + "");
-            winNumTxts.get(i).setText(winNum+"");
+            winNumTxts.get(i).setText(winNum + "");
         }
 
-        binding.bounsNumTxt.setText(bounsNum+"");
+        binding.bounsNumTxt.setText(bounsNum + "");
 
 
     }
