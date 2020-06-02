@@ -1,9 +1,11 @@
 package kr.co.yhw.finalproject_lottosimulator_20200602;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -35,12 +37,30 @@ public class MainActivity extends BaseActivity {
 
     List<TextView> myNumTxts = new ArrayList<>();
 
+    Handler mHandler = new Handler();
+    Runnable buyLottoRunnable =new Runnable() {
+        @Override
+        public void run() {
+           if (useMoney < 100000000){
+               makeLottoWinNumbers();
+               checkWinRank();
+               mHandler.post(buyLottoRunnable);
+           }
+           else {
+               Toast.makeText(mContext, "로또 구매를 종료합니다.", Toast.LENGTH_SHORT).show();
+           }
+
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setupEvents();
         setValues();
+
     }
 
     @Override
@@ -49,13 +69,14 @@ public class MainActivity extends BaseActivity {
         binding.buyAutoLottoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                while (true){
-                    makeLottoWinNumbers();
-                    checkWinRank();
-                    if(useMoney > 100000000){
-                        break;
-                    }
-                }
+                mHandler.post(buyLottoRunnable);
+//                while (true){
+//                    makeLottoWinNumbers();
+//                    checkWinRank();
+//                    if(useMoney > 100000000){
+//                        break;
+//                    }
+//                }
             }
         });
 
