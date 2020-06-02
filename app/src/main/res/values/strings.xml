@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">FinalProject_LottoSimulator</string>
+    <string name="app_name">인생역전 시뮬레이터</string>
+    <string name="win_number">Win Number</string>
+    <string name="my_number">My Number</string>
+    <string name="buy_one_lotto_btn">Buy</string>
 </resources>

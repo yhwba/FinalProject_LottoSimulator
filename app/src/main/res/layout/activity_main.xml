@@ -6,7 +6,153 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/win_number"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/winNumTxt01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\?"
+                android:textSize="24sp"/>
+            <TextView
+                android:id="@+id/winNumTxt02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\?"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/winNumTxt03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\?"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/winNumTxt04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\?"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/winNumTxt05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\?"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/winNumTxt06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\?"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/bounsNumTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\?"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/my_number"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/myNumTxt01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="3"/>
+            <TextView
+                android:id="@+id/myNumTxt02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"
+                android:text="11"/>
+
+            <TextView
+                android:id="@+id/myNumTxt03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"
+                android:text="18"/>
+
+            <TextView
+                android:id="@+id/myNumTxt04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"
+                android:text="24"/>
+
+            <TextView
+
+                android:id="@+id/myNumTxt05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"
+                android:text="38"/>
+
+
+            <TextView
+                android:id="@+id/myNumTxt06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"
+                android:text="43"/>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buyOneLottoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/buy_one_lotto_btn"/>
 
 
     </LinearLayout>
