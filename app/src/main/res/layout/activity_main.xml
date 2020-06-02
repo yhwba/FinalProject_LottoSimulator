@@ -127,7 +127,6 @@
                 android:text="24"/>
 
             <TextView
-
                 android:id="@+id/myNumTxt05"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
