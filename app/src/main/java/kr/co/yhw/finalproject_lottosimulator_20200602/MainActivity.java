@@ -19,14 +19,20 @@ public class MainActivity extends BaseActivity {
 
     ActivityMainBinding binding;
 
+    //    당첨번호 5개 저장배열
     int[] winLottoNumArr = new int[6];  //배열의 3번칸에 적힌값. 0 => 배열의 모든 칸 기본값은 0
+    //    보너스 번호 저장 변수
     int bounsNum = 0;
 
+    //    화면에 뿌려주기 편하려고 만든 텍스트뷰 목록 (당첨번호들)
     List<TextView> winNumTxts = new ArrayList<>();
+    //    사용한 금액이 커질 수 있으니 long으로
     long useMoney = 0L;
 
+    //    당첨 금액이 커질 수 있으니 long =>overflow현상 방지
     long winMoney = 0L;
 
+    //    1~꽝까지의 당첨 횟수를 기록하는면수
     int firstRankCount = 0;
     int secondRankCount = 0;
     int thirdRankCount = 0;
@@ -35,12 +41,14 @@ public class MainActivity extends BaseActivity {
     int unRankCount = 0;
 
 
+    //    내 숫자들을 받아오기 위한
     List<TextView> myNumTxts = new ArrayList<>();
 
+    //    지금 자동 구매가 도는 중인지 / 아닌지 상황 표시 변수.
     boolean isAutoBuyRunning = false;
-//    같은 핸드러 => 여러곳에서 사용 => 멤버변수 생성 (공유해서 사용하려고)
+    //    같은 핸드러 => 여러곳에서 사용 => 멤버변수 생성 (공유해서 사용하려고)
     Handler mHandler = new Handler();
-//    구매로직 코드 => 여러곳에서 사용 =>멤버변수 생성
+    //    구매로직 코드 => 여러곳에서 사용 =>멤버변수 생성
     Runnable buyLottoRunnable = new Runnable() {
         @Override
         public void run() {
